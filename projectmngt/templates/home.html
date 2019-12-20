@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+
+    <h2>{{ title }}</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Project Id</th>
+              <th scope="col">Project Title</th>
+              <th scope="col">Status</th>
+              <th scope="col">Budget (USD)</th>
+              <th scope="col">Country</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for project in projects.items %}
+              <tr>
+              <th scope="row">{{ project.id }}</th>
+              <td><a href="{{ url_for('projects.specific_project', project_id = project.id) }}">{{ project.project_name}}</a> </td>
+              <td>{{ project.pro_status}}</td>
+              <td>{{ project.sptf}} + {{ project.co_financing }}</td>
+              <td>{{ project.country.country_name }}</td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+
+        {% for page_num in projects.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+          {% if page_num %}
+            {% if projects.page == page_num %}
+              <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+              <a class="btn btn-outline-info mb-4" href="{{ url_for('projects.all_projects', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+          {% else %}
+            ...
+          {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}
+

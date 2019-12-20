@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="gap">
+
+        </div>
+        <div class="templatesstyle__TagPageHeading-lh5u5g-6 uefLh">
+            <h1 class="templatesstyle__TagName-lh5u5g-7 jyAgbM"> {{ project.id }} - {{ project.project_name }}</h1>
+
+        </div>
+        {% if current_user.is_authenticated %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('projects.update_project', project_id= project.id) }}">Update</a>
+                <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </div>
+        {% endif %}
+
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Project Status</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                USD {{ project.pro_status }}
+            </p>
+        </div>
+
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Project Objectives</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                {{ project.proj_objectives }}
+            </p>
+        </div>
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Project Objectives</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                {{ project.pro_duration }} Months
+            </p>
+        </div>
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Special Programme Trust Fund</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                USD {{ project.sptf }}
+            </p>
+        </div>
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Co Financing</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                USD {{ project.co_financing }}
+            </p>
+        </div>
+
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Project Stories</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                USD {{ project.pro_stories }}
+            </p>
+        </div>
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Region</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                {{ project.region.region_name}}
+            </p>
+        </div>
+        <div class="">
+            <h2 class="post_title postCardMinimalstyle__PostTitle-nu583d-5 hzQACJ">
+                <a href="">Country</a>
+            </h2>
+            <p class="excerpt postCardMinimalstyle__Excerpt-nu583d-6 crQIso">
+                {{ project.country.country_name}}
+            </p>
+        </div>
+        <div class="gap">
+
+        </div>
+
+        <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="{{ url_for('projects.delete_project', project_id=project.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+{% endblock content %}

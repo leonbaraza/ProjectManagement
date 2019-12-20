@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+            <div class="gap"></div>
+
+     <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>{{ title }}</legend>
+                <div class="form-group">
+                    {{ form.project_name.label(for="project_name")}}
+
+                    {% if form.project_name.errors %}
+                        {{ form.project_name(class="form-control is-invalid", id="project_name", placeholder="Enter a new Region..")}}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.project_name.errors %}
+                                <small id="regionHelp" class="form-text text-muted">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.project_name(class="form-control", id="project_name", placeholder="Enter a new Region..")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.proj_objectives.label(for="proj_objectives")}}
+
+                    {% if form.project_name.errors %}
+                        {{ form.proj_objectives(class="form-control is-invalid", id="proj_objectives", placeholder="Enter a new Region..")}}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.proj_objectives.errors %}
+                                <small id="regionHelp" class="form-text text-muted">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.proj_objectives(class="form-control", id="proj_objectives", placeholder="Enter the Project Objectives..")}}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.pro_duration.label(for="pro_duration")}}
+
+                    {% if form.project_name.errors %}
+                        {{ form.pro_duration(class="form-control is-invalid", id="pro_duration", placeholder="Enter a new Region..")}}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.pro_duration.errors %}
+                                <small id="regionHelp" class="form-text text-muted">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.pro_duration(class="form-control", id="pro_duration", placeholder="Project duration..")}}
+                    {% endif %}
+
+                    </div>
+
+                <div class="form-group">
+                    {{ form.sptf.label(for="sptf")}}
+                    {{ form.sptf(class="form-control", id="sptf", placeholder="Special Programme Trust Fund..")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.co_financing.label(for="co_financing")}}
+                    {{ form.co_financing(class="form-control", id="co_financing", placeholder="Co Funding")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.pro_status.label(for="pro_status")}}
+                    {{ form.pro_status(class="form-control", id="pro_status", placeholder="Project Status")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.pro_stories.label(for="pro_stories")}}
+                    {{ form.pro_stories(class="form-control", id="pro_stories", placeholder="Project Stories")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.party_id.label(for="party_id")}}
+                    {{ form.party_id(class="form-control", id="party_id", placeholder="Region")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.region_id.label(for="region_id")}}
+                    {{ form.region_id(class="form-control", id="region_id", placeholder="Region")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.country_id.label(for="country_id")}}
+                    {{ form.country_id(class="form-control", id="country_id", placeholder="Country")}}
+                </div>
+
+                <div class="form-group">
+                    {{ form.sdgs_id.label(for="sdgs_id")}}
+                    {{ form.sdgs_id(class="form-control", id="sdgs_id")}}
+                </div>
+
+                {{ form.submit(class="btn btn-primary")}}
+            </fieldset>
+
+        </form>
+
+        <script>
+            let region_select = document.getElementById('region_id');
+            let country_select = document.getElementById('country_id');
+
+            region_select.onchange = function () {
+                region_id = region_select.value
+
+                fetch('/all/country/' +region_id).then(function (response) {
+                    response.json().then(function (data) {
+                        let optionHTML = '';
+
+                        for(let country of data.countries){
+                            optionHTML += '<option value="' +country.id + '">' +country.country_name +'</option>';
+                        }
+                        country_select.innerHTML = optionHTML;
+                    });
+                });
+            }
+
+
+        </script>
+    <div class="gap"></div>
+    </div>
+{% endblock content %}

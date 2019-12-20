@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="gap">
+    </div>
+
+    <div class="container">
+        <h2>Name : {{ current_user.full_name }}</h2>
+        <h2>Email  : {{ current_user.email }}</h2>
+
+    <div class="">
+{#        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_user', project_id= current_user.id) }}">Update</a>#}
+    </div>
+    </div>
+{% endblock content %}

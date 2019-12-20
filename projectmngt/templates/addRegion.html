@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="gap"></div>
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>{{ title }}</legend>
+                <div class="form-group">
+                    {{ form.region.label(for="region")}}
+
+                    {% if form.region.errors %}
+                        {{ form.region(class="form-control is-invalid", id="region", placeholder="Enter a new Region..")}}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.region.errors %}
+                                <small id="regionHelp" class="form-text text-muted">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.region(class="form-control", id="region", placeholder="Enter a new Region..")}}
+                    {% endif %}
+
+{#                    {{ form.region(class="form-control", id="region", placeholder="Enter a new Region..")}}#}
+{#                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>#}
+                  </div>
+
+                {{ form.submit(class="btn btn-primary")}}
+            </fieldset>
+
+        </form>
+    <div class="gap"></div>
+    </div>
+{% endblock content %}

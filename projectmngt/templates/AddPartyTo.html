@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+            <div class="gap"></div>
+
+     <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>{{ title }}</legend>
+                <div class="form-group">
+                    {{ form.party_to_name.label(for="partyto")}}
+                    {{ form.party_to_name(class="form-control", id="partyto", placeholder="Enter a new Party To..")}}
+                    {#                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>#}
+                  </div>
+
+                {{ form.submit(class="btn btn-primary")}}
+            </fieldset>
+
+        </form>
+    <div class="gap"></div>
+    </div>
+{% endblock content %}
